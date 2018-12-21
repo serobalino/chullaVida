@@ -27,4 +27,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function juegos(){
+        return $this->hasMany(Juego::class,'id_us','id')->latest();
+    }
+
+    public function juego(){
+        return $this->hasOne(Juego::class,'id_us','id')->where('estado_ju',true)->first();
+    }
 }
