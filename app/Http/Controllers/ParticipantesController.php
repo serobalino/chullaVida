@@ -37,7 +37,7 @@ class ParticipantesController extends Controller
      */
     public function store(Request $request)
     {
-        $juego=app('App\Http\Controllers\JuegosController')->store();
+        $juego=app('App\Http\Controllers\JuegosController')->store($request->tipo);
         $aux=[];
         foreach ($request->jugadores as $nombre){
             $a['nombre_pa'] =   $nombre['nombre'];
@@ -46,6 +46,7 @@ class ParticipantesController extends Controller
             unset($a);
         }
         Participante::insert($aux);
+        return (['val'=>true,'ruta'=>route('reglas',$request->tipo)]);
     }
 
     /**
