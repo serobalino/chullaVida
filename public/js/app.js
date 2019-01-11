@@ -1815,12 +1815,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "juegos",
   data: function data() {
     return {
       jugados: [],
-      nombres: []
+      nombres: [],
+      tipos: [],
+      paso: 1,
+      tipo: {}
     };
   },
   methods: {
@@ -1843,10 +1866,23 @@ __webpack_require__.r(__webpack_exports__);
         method: 'POST',
         url: location.origin + location.pathname,
         data: {
-          jugadores: this.nombres
+          jugadores: this.nombres,
+          tipo: this.tipo.id_ti
         }
       }).then(function (response) {
         _this2.cargarJuegos();
+
+        if (response.data.val) location.href = response.data.ruta;
+      });
+    },
+    cargarTipos: function cargarTipos() {
+      var _this3 = this;
+
+      axios({
+        method: 'GET',
+        url: location.origin + '/api/juegos'
+      }).then(function (response) {
+        _this3.tipos = response.data;
       });
     },
     agregar: function agregar() {
@@ -1858,6 +1894,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    this.cargarTipos();
     this.cargarJuegos();
     this.agregar();
   }
@@ -5831,7 +5868,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -37151,80 +37188,178 @@ var render = function() {
                     _vm._m(1)
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "modal-body" }, [
-                    _c(
-                      "form",
-                      { attrs: { action: "" } },
-                      _vm._l(_vm.nombres, function(item, index) {
-                        return _c("div", { staticClass: "input-group mb-3" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: item.nombre,
-                                expression: "item.nombre"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder: "Nombre J" + (index + 1)
-                            },
-                            domProps: { value: item.nombre },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.$set(item, "nombre", $event.target.value)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          index !== 0
-                            ? _c("div", { staticClass: "input-group-append" }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass: "btn btn-outline-danger",
-                                    attrs: { type: "button" },
+                  _vm.paso === 1
+                    ? _c("div", [
+                        _c("div", { staticClass: "modal-body" }, [
+                          _c(
+                            "form",
+                            { attrs: { action: "" } },
+                            _vm._l(_vm.nombres, function(item, index) {
+                              return _c(
+                                "div",
+                                { staticClass: "input-group mb-3" },
+                                [
+                                  _c("input", {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value: item.nombre,
+                                        expression: "item.nombre"
+                                      }
+                                    ],
+                                    staticClass: "form-control",
+                                    attrs: {
+                                      type: "text",
+                                      placeholder: "Nombre J" + (index + 1)
+                                    },
+                                    domProps: { value: item.nombre },
                                     on: {
-                                      click: function($event) {
-                                        _vm.quitar(index)
+                                      input: function($event) {
+                                        if ($event.target.composing) {
+                                          return
+                                        }
+                                        _vm.$set(
+                                          item,
+                                          "nombre",
+                                          $event.target.value
+                                        )
                                       }
                                     }
-                                  },
-                                  [_vm._v("X")]
+                                  }),
+                                  _vm._v(" "),
+                                  index !== 0
+                                    ? _c(
+                                        "div",
+                                        { staticClass: "input-group-append" },
+                                        [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-outline-danger",
+                                              attrs: { type: "button" },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.quitar(index)
+                                                }
+                                              }
+                                            },
+                                            [_vm._v("X")]
+                                          )
+                                        ]
+                                      )
+                                    : _vm._e()
+                                ]
+                              )
+                            }),
+                            0
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Cerrar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.paso = 2
+                                }
+                              }
+                            },
+                            [_vm._v("Siguiente")]
+                          )
+                        ])
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.paso === 2
+                    ? _c("div", [
+                        _c(
+                          "div",
+                          { staticClass: "modal-body" },
+                          [
+                            _c("div", [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.tipo) +
+                                  "\n                                "
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.tipos, function(item) {
+                              return _c("div", { staticClass: "form-check" }, [
+                                _c(
+                                  "label",
+                                  { staticClass: "form-check-label" },
+                                  [
+                                    _c("input", {
+                                      directives: [
+                                        {
+                                          name: "model",
+                                          rawName: "v-model",
+                                          value: _vm.tipo,
+                                          expression: "tipo"
+                                        }
+                                      ],
+                                      staticClass: "form-check-input",
+                                      attrs: { type: "radio", name: "juego" },
+                                      domProps: {
+                                        value: item,
+                                        checked: _vm._q(_vm.tipo, item)
+                                      },
+                                      on: {
+                                        change: function($event) {
+                                          _vm.tipo = item
+                                        }
+                                      }
+                                    }),
+                                    _c("span", { class: item.icono_ti }),
+                                    _vm._v(
+                                      _vm._s(item.titulo_ti) +
+                                        "\n                                    "
+                                    )
+                                  ]
                                 )
                               ])
-                            : _vm._e()
+                            })
+                          ],
+                          2
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "modal-footer" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-secondary",
+                              attrs: { type: "button", "data-dismiss": "modal" }
+                            },
+                            [_vm._v("Cerrar")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "button" },
+                              on: { click: _vm.crearJuego }
+                            },
+                            [_vm._v("Jugar")]
+                          )
                         ])
-                      }),
-                      0
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-footer" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-secondary",
-                        attrs: { type: "button", "data-dismiss": "modal" }
-                      },
-                      [_vm._v("Cerrar")]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "button" },
-                        on: { click: _vm.crearJuego }
-                      },
-                      [_vm._v("Guardar")]
-                    )
-                  ])
+                      ])
+                    : _vm._e()
                 ])
               ]
             )
