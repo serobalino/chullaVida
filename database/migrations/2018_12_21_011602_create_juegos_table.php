@@ -16,9 +16,11 @@ class CreateJuegosTable extends Migration
         Schema::create('juegos', function (Blueprint $table) {
             $table->increments('id_ju');
             $table->unsignedInteger('id_us');
+            $table->unsignedInteger('id_ti');
             $table->boolean('estado_ju')->default(true);
             $table->timestamps();
             $table->foreign('id_us')->references('id')->on('users');
+            $table->foreign('id_ti')->references('id_ti')->on('tipo');
         });
     }
 
