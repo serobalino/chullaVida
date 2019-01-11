@@ -34,11 +34,12 @@ class JuegosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store($tipo)
     {
         Juego::where('id_us',Auth::user()->id)->update(['estado_ju'=>false]);
         $juego          =   new Juego();
         $juego->id_us   =   Auth::user()->id;
+        $juego->id_ti   =   $tipo;
         $juego->save();
         return $juego;
     }
