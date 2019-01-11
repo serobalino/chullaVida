@@ -28,20 +28,40 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
-                                <form action="">
-                                    <div class="input-group mb-3" v-for="(item,index) in nombres">
-                                        <input type="text" class="form-control" :placeholder="'Nombre J'+(index+1)" v-model="item.nombre"/>
-                                        <div class="input-group-append" v-if="index!==0">
-                                            <button class="btn btn-outline-danger" type="button" v-on:click="quitar(index)">X</button>
+                            <div v-if="paso===1">
+                                <div class="modal-body">
+                                    <form action="">
+                                        <div class="input-group mb-3" v-for="(item,index) in nombres">
+                                            <input type="text" class="form-control" :placeholder="'Nombre J'+(index+1)" v-model="item.nombre"/>
+                                            <div class="input-group-append" v-if="index!==0">
+                                                <button class="btn btn-outline-danger" type="button" v-on:click="quitar(index)">X</button>
+                                            </div>
                                         </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" v-on:click="paso=2">Siguiente</button>
+                                </div>
+                            </div>
+                            <div v-if="paso===2">
+                                <div class="modal-body">
+                                    <div>
+                                        {{tipo}}
                                     </div>
-                                </form>
+                                    <div class="form-check" v-for="item in tipos">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="juego" :value="item" v-model="tipo"><span :class="item.icono_ti"></span>{{item.titulo_ti}}
+                                        </label>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                                    <button type="button" class="btn btn-primary" v-on:click="crearJuego">Jugar</button>
+                                </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                                <button type="button" class="btn btn-primary" v-on:click="crearJuego">Guardar</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -56,6 +76,9 @@
         data:()=>({
             jugados:[],
             nombres:[],
+            tipos:[],
+            paso:1,
+            tipo:{},
         }),
         methods:{
             cargarJuegos:function(){
@@ -74,9 +97,20 @@
                     url: location.origin+location.pathname,
                     data:{
                         jugadores:this.nombres,
+                        tipo:this.tipo.id_ti
                     }
                 }).then((response) => {
                     this.cargarJuegos();
+                    if(response.data.val)
+                        location.href=response.data.ruta;
+                });
+            },
+            cargarTipos:function(){
+                axios({
+                    method: 'GET',
+                    url: location.origin+'/api/juegos',
+                }).then((response) => {
+                    this.tipos=response.data;
                 });
             },
             agregar:function(){
@@ -90,6 +124,7 @@
 
         },
         mounted(){
+            this.cargarTipos();
             this.cargarJuegos();
             this.agregar();
         }
