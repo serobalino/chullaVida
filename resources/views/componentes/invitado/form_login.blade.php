@@ -25,13 +25,13 @@
             </label>
         </div>
         <div class="col m--align-right">
-            <a href="{{ route('password.request') }}" id="m_login_forget_password" class="m-link">
+            <a href="{{ route('password.request') }}" id="m_login_forget_password" class="m-link m-link--danger">
                 Olvidó su contraseña
             </a>
         </div>
     </div>
     <div class="m-login__form-action">
-        <button type="submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+        <button type="submit" class="btn btn-danger m-btn m-btn--pill m-btn--custom m-btn--air">
             Ingresar
         </button>
     </div>

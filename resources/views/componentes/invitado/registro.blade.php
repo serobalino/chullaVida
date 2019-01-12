@@ -17,7 +17,7 @@
         <span class="m-login__account-msg">
             No tiene una cuenta?
         </span>
-        <a href="{{route('register')}}" class="m-link m-link--focus m-login__account-link">
+        <a href="{{route('register')}}" class="m-link m-link--danger m-login__account-link">
             Regístrese
         </a>
     </div>

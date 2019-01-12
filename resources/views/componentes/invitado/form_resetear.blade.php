@@ -1,4 +1,4 @@
-<form class="m-login__form m-form" action="{{ route('password.request') }}" method="post">
++<form class="m-login__form m-form" action="{{ route('password.request') }}" method="post">
     @csrf
     <input type="hidden" name="token" value="{{ $token }}">
     <div class="form-group m-form__group">
@@ -26,10 +26,10 @@
         @endif
     </div>
     <div class="m-login__form-action">
-        <button class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air" type="submit">
+        <button class="btn btn-danger m-btn m-btn--pill m-btn--custom m-btn--air" type="submit">
             Enviar
         </button>
-        <a href="{{route('login')}}" class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">
+        <a href="{{route('login')}}" class="btn btn-outline-danger m-btn m-btn--pill m-btn--custom">
             Cancelar
         </a>
     </div>

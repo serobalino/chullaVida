@@ -28,10 +28,10 @@
         <input id="password-confirm" type="password" class="form-control m-input" name="password_confirmation" placeholder="Confirmar contraseña" required>
     </div>
     <div class="m-login__form-action">
-        <button type="submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+        <button type="submit" class="btn btn-danger m-btn m-btn--pill m-btn--custom m-btn--air">
             {{ __('Registrar') }}
         </button>
-        <a href="{{route('login')}}" class="btn btn-outline-focus m-btn m-btn--pill m-btn--custom">
+        <a href="{{route('login')}}" class="btn btn-outline-danger m-btn m-btn--pill m-btn--custom">
             Cancelar
         </a>
     </div>
