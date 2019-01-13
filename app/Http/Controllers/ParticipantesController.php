@@ -46,7 +46,7 @@ class ParticipantesController extends Controller
             unset($a);
         }
         Participante::insert($aux);
-        return (['val'=>true,'ruta'=>route('reglas',$request->tipo)]);
+        return (['val'=>true,'ruta'=>route('play')]);
     }
 
     /**
