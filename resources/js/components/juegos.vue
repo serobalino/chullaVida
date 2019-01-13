@@ -7,9 +7,9 @@
                 </div>
                 <div class="card-body">
                     <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start" v-for="item in jugados">
+                        <a :href="item.estado_ju ? linkR : '#'" class="list-group-item list-group-item-action flex-column align-items-start" v-for="item in jugados">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">Juego A</h5>
+                                <h5 class="mb-1"><span :class="item.titulo.icono_ti"></span> {{item.titulo.titulo_ti}}</h5>
                                 <small>{{item.created_at}}</small>
                             </div>
                             <p class="mb-1"><span v-for="nom in item.jugadores">{{nom.nombre_pa}}, </span> </p>
@@ -46,12 +46,12 @@
                             </div>
                             <div v-if="paso===2">
                                 <div class="modal-body">
-                                    <div>
-                                        {{tipo}}
+                                    <div class="text-muted text-center">
+                                        {{tipo.descripcion_ti}}
                                     </div>
                                     <div class="form-check" v-for="item in tipos">
                                         <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="juego" :value="item" v-model="tipo"><span :class="item.icono_ti"></span>{{item.titulo_ti}}
+                                            <input type="radio" class="form-check-input" name="juego" :value="item" v-model="tipo"><span :class="item.icono_ti"></span> {{item.titulo_ti}}
                                         </label>
                                     </div>
 
@@ -80,6 +80,11 @@
             paso:1,
             tipo:{},
         }),
+        computed:{
+            linkR:function(){
+                return location.origin+'/play';
+            }
+        },
         methods:{
             cargarJuegos:function(){
                 axios({
