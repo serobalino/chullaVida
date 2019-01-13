@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::options('/home','JuegosController@index');
 Route::post('/home','ParticipantesController@store');
+Route::post('/chat','ChatController@enviarMsg');
