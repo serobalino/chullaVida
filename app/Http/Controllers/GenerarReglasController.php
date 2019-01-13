@@ -51,6 +51,6 @@ class GenerarReglasController extends Controller
         $partida            =   Auth::user()->juego();
         $partida->estado_ju =   false;
         $partida->save();
-        return (['val'=>true]);
+        return (['val'=>true,'ruta'=>route('home')]);
     }
 }
