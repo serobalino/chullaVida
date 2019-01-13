@@ -8,7 +8,7 @@ class Juego extends Model
 {
     protected $primaryKey   =   "id_ju";
 
-    protected $with         =   ['jugadores'];
+    protected $with         =   ['jugadores','titulo'];
 
     protected $casts        =   [
         'estado_ju'=>'bool'
@@ -16,6 +16,10 @@ class Juego extends Model
 
     public function creador(){
         return $this->hasOne(User::class,'id','id_us');
+    }
+
+    public function titulo(){
+        return $this->hasOne(Tipo::class,'id_ti','id_ti');
     }
 
     public function jugadores(){
