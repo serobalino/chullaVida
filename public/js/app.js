@@ -6270,6 +6270,11 @@ __webpack_require__.r(__webpack_exports__);
       tipo: {}
     };
   },
+  computed: {
+    linkR: function linkR() {
+      return location.origin + '/play';
+    }
+  },
   methods: {
     cargarJuegos: function cargarJuegos() {
       var _this = this;
@@ -10634,7 +10639,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -56261,14 +56266,17 @@ var render = function() {
                   {
                     staticClass:
                       "list-group-item list-group-item-action flex-column align-items-start",
-                    attrs: { href: "#" }
+                    attrs: { href: item.estado_ju ? _vm.linkR : "#" }
                   },
                   [
                     _c(
                       "div",
                       { staticClass: "d-flex w-100 justify-content-between" },
                       [
-                        _c("h5", { staticClass: "mb-1" }, [_vm._v("Juego A")]),
+                        _c("h5", { staticClass: "mb-1" }, [
+                          _c("span", { class: item.titulo.icono_ti }),
+                          _vm._v(" " + _vm._s(item.titulo.titulo_ti))
+                        ]),
                         _vm._v(" "),
                         _c("small", [_vm._v(_vm._s(item.created_at))])
                       ]
@@ -56446,13 +56454,17 @@ var render = function() {
                           "div",
                           { staticClass: "modal-body" },
                           [
-                            _c("div", [
-                              _vm._v(
-                                "\n                                    " +
-                                  _vm._s(_vm.tipo) +
-                                  "\n                                "
-                              )
-                            ]),
+                            _c(
+                              "div",
+                              { staticClass: "text-muted text-center" },
+                              [
+                                _vm._v(
+                                  "\n                                    " +
+                                    _vm._s(_vm.tipo.descripcion_ti) +
+                                    "\n                                "
+                                )
+                              ]
+                            ),
                             _vm._v(" "),
                             _vm._l(_vm.tipos, function(item) {
                               return _c("div", { staticClass: "form-check" }, [
@@ -56483,7 +56495,8 @@ var render = function() {
                                     }),
                                     _c("span", { class: item.icono_ti }),
                                     _vm._v(
-                                      _vm._s(item.titulo_ti) +
+                                      " " +
+                                        _vm._s(item.titulo_ti) +
                                         "\n                                    "
                                     )
                                   ]
