@@ -19,6 +19,7 @@ window.Vue = require('vue');
 
 Vue.component('juegos', require('./components/juegos').default);
 Vue.component('chat', require('./components/chat').default);
+Vue.component('reglas', require('./components/reglas').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
