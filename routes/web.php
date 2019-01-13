@@ -21,3 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::options('/home','JuegosController@index');
 Route::post('/home','ParticipantesController@store');
 Route::post('/chat','ChatController@enviarMsg');
+
+Route::get('/play','GenerarReglasController@jugar')->name('play');
+
+Route::get('regla','GenerarReglasController@generar');
+Route::delete('regla','GenerarReglasController@parar');
