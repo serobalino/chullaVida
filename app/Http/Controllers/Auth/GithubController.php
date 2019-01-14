@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
+use Socialite;
 
 class GithubController extends Controller
 {
