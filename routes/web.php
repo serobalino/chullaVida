@@ -26,3 +26,9 @@ Route::get('/play','GenerarReglasController@jugar')->name('play');
 
 Route::get('regla','GenerarReglasController@generar');
 Route::delete('regla','GenerarReglasController@parar');
+
+Route::get('login/github', 'Auth\GithubController@redirectToProvider')->name('github');
+Route::get('login/github/callback', 'Auth\GithubController@handleProviderCallback');
+
+Route::get('login/google', 'Auth\GoogleController@redirectToProvider')->name('google');
+Route::get('login/google/callback', 'Auth\GoogleController@handleProviderCallback');
